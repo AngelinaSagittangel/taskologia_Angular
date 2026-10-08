@@ -1,0 +1,41 @@
+<main class="tasks">
+  <section class="tasks__container">
+
+    <div class="tasks__header">
+      <div class="tasks__intro">
+        <img class="tasks__logo" src="images/logo.svg" alt="Логотип">
+        <div class="tasks__heading">
+          <p class="tasks__label">Taskologia</p>
+          <h1 class="tasks__title">Трекер задач</h1>
+        </div>
+      </div>
+      <div class="tasks__counter">Активных: {{ getActiveTasksCount() }}</div>
+    </div>
+
+    <form class="tasks__form" (ngSubmit)="addTask()">
+      <div class="tasks__input-wrapper">
+        <input type="text" class="tasks__input" name="taskTitle" #inputElement [(ngModel)]="taskTitle"
+               placeholder="Введите новую задачу">
+        @if (taskTitle) {
+          <button class="tasks__clear" type="button" (click)="clearTaskInput()">
+            <img src="images/icons/cross.svg" alt="Cross">
+          </button>
+        }
+      </div>
+      <button class="tasks__button">Добавить</button>
+    </form>
+
+    <div class="tasks__list">
+
+      @for (task of tasks; track task.id) {
+        <app-task-card [task]="task" (toggled)="toggleTask($event)" (deleted)="deleteTask($event)"></app-task-card>
+      } @empty {
+        <div class="tasks__empty">
+          <p>Задач пока нет</p>
+          <span>Добавьте первую задачу через форму выше</span>
+        </div>
+      }
+    </div>
+
+  </section>
+</main>

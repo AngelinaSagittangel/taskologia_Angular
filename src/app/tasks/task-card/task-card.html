@@ -1,0 +1,18 @@
+<div class="task-card" [class.task-card_completed]="task.completed">
+  <button class="task-card__status" type="button" (click)="toggle()">
+    @if (task.completed) {
+      <img src="images/icons/tick.svg" alt="Tick">
+    }
+  </button>
+  <div class="task-card__content">
+    <p class="task-card__title">{{ task.title }}</p>
+    @if (task.completed) {
+      <span class="task-card__badge">Выполнено</span>
+    } @else {
+      <span class="task-card__badge task-card__badge_active">В работе</span>
+    }
+  </div>
+  <button class="task-card__delete" type="button" (click)="delete()">
+    <img src="images/icons/cross.svg" alt="Cross">
+  </button>
+</div>
