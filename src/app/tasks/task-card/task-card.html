@@ -1,5 +1,7 @@
-<div class="task-card" [class.task-card_completed]="task.completed">
-  <button class="task-card__status" type="button" (click)="toggle()">
+<div class="task-card" [class.task-card_completed]="task.completed"
+     [class.task-card_selected]="isSelected"
+     (click)="select()">
+  <button class="task-card__status" type="button" (click)="toggle($event)">
     @if (task.completed) {
       <img src="images/icons/tick.svg" alt="Tick">
     }
@@ -12,7 +14,7 @@
       <span class="task-card__badge task-card__badge_active">В работе</span>
     }
   </div>
-  <button class="task-card__delete" type="button" (click)="delete()">
+  <button class="task-card__delete" type="button" (click)="delete($event)">
     <img src="images/icons/cross.svg" alt="Cross">
   </button>
 </div>

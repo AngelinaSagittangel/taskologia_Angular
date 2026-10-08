@@ -10,14 +10,22 @@ import { Task } from '../task';
 export class TaskCard {
 
   @Input({ required: true }) task!: Task;
-  @Output() deleted = new EventEmitter<number>();
-  @Output() toggled = new EventEmitter<Task>();
+  @Input() isSelected: boolean = false;
+  @Output('delete') deleted = new EventEmitter<number>();
+  @Output('toggle') toggled = new EventEmitter<Task>();
+  @Output('select') selected = new EventEmitter<Task>();
 
-  toggle() {
+  toggle(event: Event) {
+    event.stopPropagation();
     this.toggled.emit(this.task);
   }
 
-  delete() {
+  delete(event: Event) {
+    event.stopPropagation();
     this.deleted.emit(this.task.id);
+  }
+
+  select() {
+    this.selected.emit(this.task);
   }
 }

@@ -1,0 +1,11 @@
+<aside class="task-details">
+  <div class="task-details__header">
+    <h2 class="task-details__title">{{ task.title }}</h2>
+    <button class="task-details__close" type="button" (click)="close()">
+      <img src="images/icons/cross.svg" alt="Cross">
+    </button>
+  </div>
+  <div class="task-details__description">
+    {{ task.description }}
+  </div>
+</aside>

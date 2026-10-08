@@ -8,6 +8,7 @@
   border-radius: 18px;
   background: #181326;
   transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
 
   &:hover {
     border-color: #6d50a9;
@@ -19,6 +20,11 @@
       color: #77777f;
       text-decoration: line-through;
     }
+  }
+
+  &_selected {
+    border-color: #8b5cf6;
+    background: #241936;
   }
 
   &__status,
