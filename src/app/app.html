@@ -20,20 +20,21 @@
                  [ngModel]="taskTitle()" (ngModelChange)="taskTitle.set($event)"
 
                  placeholder="Введите новую задачу">
-          <div class="tasks__description-wrapper" [class.tasks__description-wrapper_show]="taskTitle().trim()">
-            <textarea class="tasks__textarea"
-                      name="taskDescription"
-                      placeholder="Добавьте описание задачи"
-                      [ngModel]="taskDescription()"
-                      (ngModelChange)="taskDescription.set($event)"></textarea>
-          </div>
+          <textarea class="tasks__textarea"
+                    name="taskDescription"
+                    placeholder="Добавьте описание задачи"
+                    *appShowIfValue="taskTitle()"
+                    [ngModel]="taskDescription()"
+                    (ngModelChange)="taskDescription.set($event)"></textarea>
           @if (taskTitle()) {
-            <button class="tasks__clear" type="button" (click)="clearTaskInput()">
+            <button class="tasks__clear" type="button" (click)="clearTaskInput()"
+                    *appShowIfValue="taskTitle()"
+                    appTooltip="Очистить">
               <img src="images/icons/cross.svg" alt="Cross">
             </button>
           }
         </div>
-        <button class="tasks__button">Добавить</button>
+        <button class="tasks__button" *appShowIfValue="taskTitle()">Добавить</button>
       </form>
 
       <div class="tasks__list">

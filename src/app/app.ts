@@ -3,6 +3,8 @@ import { Task } from './tasks/task';
 import { FormsModule } from '@angular/forms';
 import { TaskCard } from './tasks/task-card/task-card';
 import { TaskDetails } from './tasks/task-details/task-details';
+import { TooltipDirective } from './shared/ui/tooltip';
+import { ShowIfValueDirective } from './shared/ui/show-if-value';
 
 type TaskDraft = {
   title: string;
@@ -14,7 +16,9 @@ type TaskDraft = {
   imports: [
     FormsModule,
     TaskCard,
-    TaskDetails
+    TaskDetails,
+    TooltipDirective,
+    ShowIfValueDirective
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'

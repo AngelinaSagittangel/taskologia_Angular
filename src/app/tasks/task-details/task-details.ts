@@ -7,10 +7,13 @@ import {
   ViewChild
 } from '@angular/core';
 import { Task } from '../task';
+import { TooltipDirective } from '../../shared/ui/tooltip';
 
 @Component({
   selector: 'app-task-details',
-  imports: [],
+  imports: [
+    TooltipDirective
+  ],
   templateUrl: './task-details.html',
   styleUrl: './task-details.scss',
   host: {

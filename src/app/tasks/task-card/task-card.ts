@@ -1,9 +1,12 @@
 import { Component, input, output } from '@angular/core';
 import { Task } from '../task';
+import { TooltipDirective } from '../../shared/ui/tooltip';
 
 @Component({
   selector: 'app-task-card',
-  imports: [],
+  imports: [
+    TooltipDirective
+  ],
   templateUrl: './task-card.html',
   styleUrl: './task-card.scss'
 })

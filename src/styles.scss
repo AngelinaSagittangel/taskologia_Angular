@@ -20,3 +20,15 @@ body {
 button {
   cursor: pointer;
 }
+
+.tooltip {
+  position: fixed;
+  text-align: center;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  z-index: 1000;
+}
