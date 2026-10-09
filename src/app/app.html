@@ -20,6 +20,13 @@
                  [ngModel]="taskTitle()" (ngModelChange)="taskTitle.set($event)"
 
                  placeholder="Введите новую задачу">
+          <div class="tasks__description-wrapper" [class.tasks__description-wrapper_show]="taskTitle().trim()">
+            <textarea class="tasks__textarea"
+                      name="taskDescription"
+                      placeholder="Добавьте описание задачи"
+                      [ngModel]="taskDescription()"
+                      (ngModelChange)="taskDescription.set($event)"></textarea>
+          </div>
           @if (taskTitle()) {
             <button class="tasks__clear" type="button" (click)="clearTaskInput()">
               <img src="images/icons/cross.svg" alt="Cross">

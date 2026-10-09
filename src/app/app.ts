@@ -1,8 +1,13 @@
-import { Component, computed, ElementRef, signal, ViewChild } from '@angular/core';
+import { Component, computed, effect, ElementRef, signal, ViewChild } from '@angular/core';
 import { Task } from './tasks/task';
 import { FormsModule } from '@angular/forms';
 import { TaskCard } from './tasks/task-card/task-card';
 import { TaskDetails } from './tasks/task-details/task-details';
+
+type TaskDraft = {
+  title: string;
+  description: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -17,6 +22,8 @@ import { TaskDetails } from './tasks/task-details/task-details';
 export class App {
   @ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
   @ViewChild(TaskDetails) taskDetails?: TaskDetails;
+
+  private readonly taskDraftStorageKey = 'taskologiia-task-draft';
 
   taskTitle = signal('');
   selectedTask = signal<Task | null>(null);
@@ -37,9 +44,29 @@ export class App {
     }
   ]);
 
+  taskDescription = signal('');
+
   activeTasksCount = computed(() =>
     this.tasks().filter((task) => !task.completed).length
   );
+
+  constructor() {
+    const savedDraft = localStorage.getItem(this.taskDraftStorageKey);
+    if (savedDraft) {
+      const draft = JSON.parse(savedDraft);
+      this.taskTitle.set(draft.title || null);
+      this.taskDescription.set(draft.description || null);
+    }
+
+    effect(() => {
+      const draft: TaskDraft = {
+        title: this.taskTitle(),
+        description: this.taskDescription()
+      };
+
+      localStorage.setItem(this.taskDraftStorageKey, JSON.stringify(draft));
+    });
+  }
 
 
   toggleTask(taskToToggle: Task) {
@@ -56,6 +83,7 @@ export class App {
 
   addTask() {
     const task = this.taskTitle().trim();
+    const description = this.taskDescription().trim();
 
     if (!task) {
       this.inputElement.nativeElement.focus();
@@ -69,12 +97,13 @@ export class App {
       id: lastTask ? lastTask.id + 1 : 1,
       title: task,
       completed: false,
-      description: ''
+      description
     };
 
     this.tasks.update(currentTask => [...currentTask, newTask]);
 
     this.taskTitle.set('');
+    this.taskDescription.set('');
   }
 
   deleteTask(id: number) {

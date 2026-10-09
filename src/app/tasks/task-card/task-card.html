@@ -1,14 +1,14 @@
-<div class="task-card" [class.task-card_completed]="task.completed"
-     [class.task-card_selected]="isSelected"
+<div class="task-card" [class.task-card_completed]="task().completed"
+     [class.task-card_selected]="isSelected()"
      (click)="select()">
   <button class="task-card__status" type="button" (click)="toggle($event)">
-    @if (task.completed) {
+    @if (task().completed) {
       <img src="images/icons/tick.svg" alt="Tick">
     }
   </button>
   <div class="task-card__content">
-    <p class="task-card__title">{{ task.title }}</p>
-    @if (task.completed) {
+    <p class="task-card__title">{{ task().title }}</p>
+    @if (task().completed) {
       <span class="task-card__badge">Выполнено</span>
     } @else {
       <span class="task-card__badge task-card__badge_active">В работе</span>

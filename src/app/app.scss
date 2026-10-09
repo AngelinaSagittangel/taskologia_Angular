@@ -30,7 +30,6 @@
   }
 
 
-
   &__header {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
@@ -114,7 +113,7 @@
 
   &__clear {
     position: absolute;
-    top: 50%;
+    top: 25px;
     right: 16px;
     width: 22px;
     height: 22px;
@@ -135,6 +134,44 @@
     &:hover {
       opacity: 1;
       transform: translateY(-50%) scale(1.08);
+    }
+  }
+
+  &__description-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: max-height 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+
+    &_show {
+      opacity: 1;
+      max-height: 140px;
+      transform: translateY(0);
+    }
+  }
+
+  &__textarea {
+    width: 100%;
+    min-height: 88px;
+    margin-top: 12px;
+    padding: 14px 16px;
+    box-sizing: border-box;
+    border: 1px solid #3b3256;
+    border-radius: 16px;
+    background: #171321;
+    color: #f5f5f5;
+    font-family: inherit;
+    font-size: 14px;
+    resize: vertical;
+    outline: none;
+
+    &::placeholder {
+      color: #7c728f;
+    }
+
+    &:focus {
+      border-color: #8b5cf6;
     }
   }
 
