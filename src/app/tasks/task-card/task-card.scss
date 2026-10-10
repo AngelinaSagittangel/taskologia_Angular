@@ -1,3 +1,5 @@
+@use '../../../styles/variables' as * ;
+
 .task-card {
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -34,19 +36,28 @@
     padding: 0;
     border: 1px solid #554874;
     background: transparent;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    color: #dacdff;
+
+    &_priority-low {
+      border-color: $priority-low-color;
+    }
+
+    &_priority-medium {
+      border-color: $priority-medium-color;
+    }
+
+    &_priority-high {
+      border-color: $priority-high-color;
+    }
 
     &:hover {
       color: #f5f5f5;
       border-color: #8b5cf6;
       background: rgba(139, 92, 246, 0.14);
     }
-  }
-
-  &__status {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    color: #dacdff;
   }
 
   &__deadline {
@@ -58,6 +69,12 @@
     line-height: 1;
     white-space: nowrap;
     background: rgba(85, 72, 116, 0.2);
+
+    &_expired {
+      border-color: $priority-high-color;
+      color: #ff4d4d;
+      background: rgba(239, 68, 68, 0.14);
+    }
   }
 
   &__content {

@@ -54,7 +54,7 @@ export class App {
       completed: true,
       description: 'Самостоятельно реализовать первый проект на Angular',
       createdAt: '2026-10-05T10:32:14.000Z',
-      deadline: '2026-10-20T15:32:14.000Z',
+      deadline: '2026-10-05T15:32:14.000Z',
       priority: 'high'
     }
   ]);

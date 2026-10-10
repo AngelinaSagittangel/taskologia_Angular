@@ -1,7 +1,11 @@
 <div class="task-card" [class.task-card_completed]="task().completed"
      [class.task-card_selected]="isSelected()"
      (click)="select()">
-  <button class="task-card__status" type="button" (click)="toggle($event)"
+  <button type="button" (click)="toggle($event)"
+          [ngClass]="[
+          'task-card__status',
+          (task().priority ? 'task-card__status_priority-' + task().priority : '')
+          ]"
           [appTooltip]="task().completed ? 'Отменить выполнение' : 'Выполнить'">
     @if (task().completed) {
       <img src="images/icons/tick.svg" alt="Tick">
@@ -16,7 +20,8 @@
     }
   </div>
   @if (task().deadline) {
-    <div class="task-card__deadline" appTooltip="Дедлайн">
+    <div class="task-card__deadline" [appTooltip]="'Дедлайн: ' + (task().deadline | date: 'd MMMM HH:mm')"
+         [class.task-card__deadline_expired]="isDeadlineExpired(task().deadline)">
       {{ task().deadline | taskDeadline }}
     </div>
   }

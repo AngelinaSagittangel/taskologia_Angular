@@ -1,3 +1,5 @@
+@use '../../../styles/variables' as * ;
+
 :host {
   position: fixed;
   top: 24px;
@@ -6,7 +8,6 @@
   z-index: 20;
   display: flex;
   width: 400px;
-  //overflow: hidden;
 }
 
 .task-details {
@@ -53,6 +54,12 @@
     line-height: 1;
     white-space: nowrap;
     background: rgba(85, 72, 116, 0.2);
+
+    &_expired {
+      border-color: $priority-high-color;
+      color: #ff4d4d;
+      background: rgba(239, 68, 68, 0.14);
+    }
   }
 
   &__title {
@@ -146,6 +153,35 @@
     &:hover {
       background: #1f1731;
     }
+  }
+
+  &__priority {
+    stroke: white;
+
+    &_low {
+      stroke: $priority-low-color;
+
+      svg {
+        fill: $priority-low-color;
+      }
+    }
+
+    &_medium {
+      stroke: $priority-medium-color;
+
+      svg {
+        fill: $priority-medium-color;
+      }
+    }
+
+    &_high {
+      stroke: $priority-high-color;
+
+      svg {
+        fill: $priority-high-color;
+      }
+    }
+
   }
 }
 

@@ -8,13 +8,19 @@ import {
 } from '@angular/core';
 import { Task } from '../task';
 import { TooltipDirective } from '../../shared/ui/tooltip';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
+import { TaskDeadlinePipe } from '../task-deadline-pipe';
+import { isDeadlineExpired } from '../task-deadline';
+import { TaskPriorityPipe } from './task-priority-pipe';
 
 @Component({
   selector: 'app-task-details',
   imports: [
     TooltipDirective,
-    DatePipe
+    DatePipe,
+    TaskDeadlinePipe,
+    NgClass,
+    TaskPriorityPipe
   ],
   templateUrl: './task-details.html',
   styleUrl: './task-details.scss',
@@ -27,6 +33,7 @@ export class TaskDetails implements AfterViewInit, OnDestroy, OnInit {
   task = input.required<Task>();
   closed = output<void>({ alias: 'close' });
   deleted = output<number>({ alias: 'delete' });
+  protected readonly isDeadlineExpired = isDeadlineExpired;
 
   @ViewChild('details') details!: ElementRef<HTMLElement>;
 
@@ -82,4 +89,6 @@ export class TaskDetails implements AfterViewInit, OnDestroy, OnInit {
   closeDetailsByEscape() {
     this.close();
   }
+
+  protected readonly TaskPriorityPipe = TaskPriorityPipe;
 }
