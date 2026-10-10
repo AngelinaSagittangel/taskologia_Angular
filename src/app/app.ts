@@ -33,18 +33,29 @@ export class App {
   selectedTask = signal<Task | null>(null);
 
   tasks = signal<Task[]>([
-    { id: 1, title: 'Изучить Angular', completed: true, description: 'Разобраться с основами и декораторами' },
+    {
+      id: 1, title: 'Изучить Angular', completed: true, description: 'Разобраться с основами и декораторами',
+      createdAt: '2026-10-10T10:32:14.000Z',
+      deadline: '2026-10-10T15:32:14.000Z',
+      priority: null
+    },
     {
       id: 2,
       title: 'Разобраться с binding',
       completed: false,
-      description: ''
+      description: '',
+      createdAt: '2026-10-06T10:32:14.000Z',
+      deadline: '2026-10-11T15:32:14.000Z',
+      priority: 'medium'
     },
     {
       id: 3,
       title: 'Сделать первый мини-проект',
       completed: true,
-      description: 'Самостоятельно реализовать первый проект на Angular'
+      description: 'Самостоятельно реализовать первый проект на Angular',
+      createdAt: '2026-10-05T10:32:14.000Z',
+      deadline: '2026-10-20T15:32:14.000Z',
+      priority: 'high'
     }
   ]);
 
@@ -101,7 +112,10 @@ export class App {
       id: lastTask ? lastTask.id + 1 : 1,
       title: task,
       completed: false,
-      description
+      description,
+      priority: null,
+      createdAt: new Date().toISOString(),
+      deadline: null
     };
 
     this.tasks.update(currentTask => [...currentTask, newTask]);

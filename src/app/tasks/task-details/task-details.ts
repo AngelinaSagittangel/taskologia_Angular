@@ -8,11 +8,13 @@ import {
 } from '@angular/core';
 import { Task } from '../task';
 import { TooltipDirective } from '../../shared/ui/tooltip';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-task-details',
   imports: [
-    TooltipDirective
+    TooltipDirective,
+    DatePipe
   ],
   templateUrl: './task-details.html',
   styleUrl: './task-details.scss',
@@ -24,7 +26,7 @@ export class TaskDetails implements AfterViewInit, OnDestroy, OnInit {
 
   task = input.required<Task>();
   closed = output<void>({ alias: 'close' });
-
+  deleted = output<number>({ alias: 'delete' });
 
   @ViewChild('details') details!: ElementRef<HTMLElement>;
 
@@ -64,6 +66,10 @@ export class TaskDetails implements AfterViewInit, OnDestroy, OnInit {
     setTimeout(() => {
       this.closed.emit();
     }, 200);
+  }
+
+  delete() {
+    this.deleted.emit(this.task().id);
   }
 
   highlightPanel() {
